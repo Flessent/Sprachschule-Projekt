@@ -2,6 +2,8 @@ package dre.org;
 
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
+
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.AbstractProvider;
 import org.modelmapper.Converter;
@@ -10,10 +12,20 @@ import org.modelmapper.Provider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @SpringBootApplication
 public class DrEApplication {
 
+	public static Logger logger= LoggerFactory.getLogger(DrEApplication.class);
+	@PostConstruct
+	public void init() {
+		logger.info("Application started...");
+	}
 	public static void main(String[] args) {
+		logger.info("Application executed...");
 		SpringApplication.run(DrEApplication.class, args);
 	}
 	

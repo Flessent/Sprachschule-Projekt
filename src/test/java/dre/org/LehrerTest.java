@@ -56,7 +56,7 @@ public class LehrerTest{
 		sprache.add(spracheRepository.getCodeSpracheByLibelle("Englisch"));
 		niveau.add(niveauRepository.getCodeNiveauByLibelle("C2"));
    HashSet<UUID> 	roles = new HashSet<UUID> ();
-      roles.add(rolesRepository.getCodeRoleByRole("LEHRER"));
+      roles.add(rolesRepository.getCodeRoleByRole(null));
       Long datetime = System.currentTimeMillis();
       Timestamp timestamp= new Timestamp(datetime);
       Date heute = new Date(0); 

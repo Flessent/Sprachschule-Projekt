@@ -1,6 +1,7 @@
 package dre.org;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -10,6 +11,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,10 @@ import dre.org.services.SpracheServices;
 
 @SpringBootTest
 class DrEApplicationTests {
+	@Test
+	public void contextLoads() {
+		assertEquals(true, true);
+	}
 
 	@Test
 	void CalculTest() {

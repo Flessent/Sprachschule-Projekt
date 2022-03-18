@@ -37,11 +37,7 @@ import dre.org.services.SpracheServices;
 class DrEApplicationTests {
 	public static Logger logger= LoggerFactory.getLogger(DrEApplication.class);
 
-	@Test
-	public void contextLoads() {
-		logger.info("Test case executing...");
-		assertEquals(true, true);
-	}
+	
 
 	@Test
 	void CalculTest() {

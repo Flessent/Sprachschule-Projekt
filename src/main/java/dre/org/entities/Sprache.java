@@ -92,7 +92,9 @@ public class Sprache  implements Serializable{
 	public Sprache() {
 		
 	}
-	
+	public Sprache(String libelle) {
+		this.libelle=libelle;
+	}
 
 public Sprache(UUID codeSprache) {
 	this.codeSprache=codeSprache;
@@ -162,12 +164,6 @@ public Sprache(UUID codeSprache) {
 		this.lehrer = lehrer;
 	}
 
-	/*@Override
-	public String toString() {
-		return "Sprache [kurs=" + kurs + ", niveau=" + niveau + ", codeSprache=" + codeSprache + ", libelle=" + libelle
-				+ ", intensive=" + intensive + "]";
-	}
-*/
 
 
 

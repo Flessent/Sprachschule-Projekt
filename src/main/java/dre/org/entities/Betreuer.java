@@ -3,31 +3,22 @@ package dre.org.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import lombok.Data;
 @DiscriminatorValue(value = "BETREUER")
 @Entity(name = "betreuer")
 @JsonTypeName("betreuer")
 
-public class Betreuer extends Lehrer implements Serializable{
+public @Data class Betreuer extends Lehrer implements Serializable{
 		private static final long serialVersionUID = 1L;
 
 	@Basic(optional = false)
@@ -51,7 +42,8 @@ protected BigDecimal salaire;
 					Date dateDebutActiviteOuCours,String activiteEnParalelle,boolean isActived,Set<Sprache> sprache,	Set<Niveau> niveau,Integer nbreMoisExperiences,BigDecimal salaire,HashSet<Roles> roles) {
 				super(username,nom,prenom,dateNaissance,nationalite,profession,quartier,numTel,email,numCni,password,diplomeEleve,dateDebutActiviteOuCours,activiteEnParalelle,
 				isActived,sprache,niveau,nbreMoisExperiences,salaire,roles);
-
+this.salaire=salaire;
+this.nbreMoisExperiences=nbreMoisExperiences;
 
 			}
 		

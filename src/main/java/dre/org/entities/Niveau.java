@@ -86,6 +86,9 @@ public class Niveau implements Serializable {
 public Niveau() {
 	
 }
+public Niveau(String libelle) {
+	this.libelle=libelle;
+}
 
 public Niveau(UUID codeNiveau) {
 	this.codeNiveau=codeNiveau;

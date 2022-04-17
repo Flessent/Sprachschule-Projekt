@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 
-@Entity
+@Entity(name = "sekretaer")
 @DiscriminatorValue(value = "SEKRETAERE")
 @JsonTypeName("sekretaer")
 @NoArgsConstructor

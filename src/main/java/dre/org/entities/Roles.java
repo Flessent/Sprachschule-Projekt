@@ -22,8 +22,11 @@ import org.hibernate.annotations.Type;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import lombok.AllArgsConstructor;
+
 @Entity
 @Table(name = "roles")
+@AllArgsConstructor
 public class Roles implements Serializable{
 	@JsonIdentityInfo(scope = Roles.class,generator = ObjectIdGenerators.PropertyGenerator.class, property = "codeRole")
 
@@ -62,7 +65,11 @@ public class Roles implements Serializable{
 	public Roles(String role) {
 		this.role=role;
 	}
-	
+	public Roles(UUID codeRole, String role, String description) {
+		this.codeRole=codeRole;
+		this.description=description;
+		this.role=role;
+	}
 
 	public Roles(String roles, String description) {
 		this.role=roles;

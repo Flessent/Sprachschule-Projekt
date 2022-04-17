@@ -1,14 +1,10 @@
 package dre.org;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -16,10 +12,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @Configuration
-@RestController
 @EnableWebMvc
+@ComponentScan(basePackages = {"dre.org.controller"})
 @RequestMapping("/api/v1")
-public class WebMVCConfig  implements WebMvcConfigurer {
+public class WebMVCConfig  implements WebMvcConfigurer  {
 	
 	 @Override
 	    public void addCorsMappings(CorsRegistry registry) {

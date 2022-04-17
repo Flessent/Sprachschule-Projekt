@@ -5,14 +5,11 @@ import java.util.Arrays;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
@@ -20,9 +17,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @Configuration
-@EnableWebSecurity //automatisch anpassen
-@EnableGlobalMethodSecurity(securedEnabled = true)
-@EnableAutoConfiguration
 public class DrE_SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
@@ -52,9 +46,9 @@ public CorsFilter corsFilter() {
     return new CorsFilter(urlBasedCorsConfigurationSource);
 }
 	
-
+     
 	@Autowired
-	public void globalConfig(AuthenticationManagerBuilder auth,DataSource dataSource) throws Exception{ 
+	public void globalConfig(AuthenticationManagerBuilder auth, DataSource dataSource) throws Exception{ 
 		//auth.inMemoryAuthentication().withUser("admin").password(encoder("123")).roles("VERWALTER", "LEHRER");//identification en utilisant les users stockés en mémoire
 		auth.jdbcAuthentication()
 	     .dataSource(dataSource)
@@ -65,14 +59,20 @@ public CorsFilter corsFilter() {
 	
 	
 	}
+	/*
 	
+	@Override
+	@Autowired
+	protected void configure (AuthenticationManagerBuilder auth)throws Exception{
+		auth.inMemoryAuthentication().
+		withUser("flessent@dre.org").password(encoder("merkel007")).roles("LEITER");
+	}
 	
-	
-	
+	*/
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
+
 		//http.addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class);
 	    http.csrf().disable();
 	    http.cors();

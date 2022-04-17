@@ -39,71 +39,36 @@ import dre.org.services.SekretaerServices;
 @RequestMapping("/sekretaer")
 public class SekretaerRestService {
 
-	@Autowired(required = false)
+	@Autowired
 	private SekretaerServices sekretaerServices;
 	
 
-	@Autowired
-	private LehrerServices lehrerServices;
-	
-@Autowired
-private RolesServices rolesServices;
-	
-	@Autowired
-	private ModelMapper modelMapper;
-	private SekretaerDTO convertEntityToDto(Sekretaer sekretaer){
-		
-      	modelMapper.getConfiguration()
-    	.setMatchingStrategy(MatchingStrategies.LOOSE)
-    	  .setFieldMatchingEnabled(true);
-
-      	SekretaerDTO sekretaerDTO=new SekretaerDTO();
-
-      	sekretaerDTO=modelMapper.map(sekretaer, SekretaerDTO.class);
-
-    	return sekretaerDTO;
-    } 
-
-   
-   
-    
-    private Sekretaer convertDtoToEntity(SekretaerDTO sekretaerDTO){
-
-        modelMapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.LOOSE);
-        Sekretaer sekretaer = new Sekretaer() ;
-      //sekretaer.setLanguesSekretaer(sekretaerDTO.getLanguesSekretaer().toString());
-        sekretaer = modelMapper.map(sekretaerDTO, Sekretaer.class);
-        Set<Roles> roles=rolesServices.getAllRolesByUUID(sekretaerDTO.getRoles());
-        sekretaer.setRoles(roles);
-        return sekretaer;
-    }
 	
     @Secured(value= {"ROLE_VERWALTER","ROLE_STUDENT","ROLE_LEHRER","ROLE_LEITER"})
  	@PostMapping(path = "/saveSekretaer")
  	public @ResponseBody Object saveSekretaer(@RequestBody @Valid SekretaerDTO sekretaerDTO) {
  		System.out.println("sekretaerDTO :"+sekretaerDTO.toString());
 
- 	return lehrerServices.saveLehrer(convertDtoToEntity(sekretaerDTO));
+ 	return this.sekretaerServices.saveSekretaer(this.sekretaerServices.convertDtoToEntity(sekretaerDTO));
  	}
 
 	 @Secured(value= {"ROLE_VERWALTER","ROLE_STUDENT","ROLE_LEHRER","ROLE_LEITER"})
 		@GetMapping(path = "/listSekretaer")
 	 public ResponseEntity< List<SekretaerDTO>> listSekretaer(){
-		 List<SekretaerDTO> listSekretaerDTO =lehrerServices.getListSekretaer().stream().map(this::convertEntityToDto).collect(Collectors.toList());
+		 List<SekretaerDTO> listSekretaerDTO =this.sekretaerServices.getListSekretaer().stream().map(sekretaerDTO-> this.sekretaerServices. convertEntityToDto(sekretaerDTO) ).collect(Collectors.toList());
 		
 		 return new ResponseEntity<>(listSekretaerDTO,HttpStatus.OK);
 	 }
 	 @Secured(value= {"ROLE_VERWALTER","ROLE_STUDENT","ROLE_LEHRER","ROLE_LEITER"})
 @PatchMapping(path = "/updateSekretaer")
 	public ResponseEntity<?> updateSekretaer(@RequestBody SekretaerDTO sekretaerDTO){
-		 return new  ResponseEntity<>(lehrerServices.updateLehrer(convertDtoToEntity(sekretaerDTO)), HttpStatus.OK);
+		 return new  ResponseEntity<>(this.sekretaerServices.updateSekretaer( this.sekretaerServices.convertDtoToEntity(sekretaerDTO)), HttpStatus.OK);
 		 
 	 }
 	 @Secured(value= {"ROLE_VERWALTER","ROLE_STUDENT","ROLE_LEHRER","ROLE_LEITER"})
      @DeleteMapping(path = "/deleteSekretaer/{username}")
 	 public ResponseEntity<?> deleteSekretaer(@PathVariable("username") String username) {
-		 lehrerServices.deleteLehrer(username);
+		 this.sekretaerServices.deleteSekretaer(username);
 	 return new ResponseEntity<>(HttpStatus.OK);
 	 }
 	

@@ -44,7 +44,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 	    @JsonSubTypes.Type(value = Sekretaer.class, name = "sekretaer"),
 	    @JsonSubTypes.Type(value = Lehrer.class, name = "lehrer"),
 	    @JsonSubTypes.Type(value = Verwalter.class, name = "verwalter"),
-	    @JsonSubTypes.Type(value = Betreuer.class, name = "betreuer")
+	    @JsonSubTypes.Type(value = Betreuer.class, name = "betreuer"),
+	    @JsonSubTypes.Type(value = Leiter.class, name = "leiter")
+
 })
 
 @Entity

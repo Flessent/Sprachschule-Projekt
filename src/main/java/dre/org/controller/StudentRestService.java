@@ -12,6 +12,7 @@ import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -43,77 +44,17 @@ import dre.org.services.StudentServices;
 @RequestMapping("/student")
 public class StudentRestService extends RuntimeException{
 	@Autowired
-	public SpracheServices spracheServices;
-	@Autowired
-	public NiveauServices niveauServices;
-	private static final long serialVersionUID = 1L;
-
-	@Autowired
-    private  ModelMapper modelMapper;
-
-@Autowired(required = false)
-private StudentServices studentServices;
-
-@Autowired
-private RolesServices rolesServices;
-@Autowired
-private LehrerServices lehrerServices;
-
-Converter<Sprache, UUID> uuidConverterSprache = new AbstractConverter<Sprache, UUID>() {
-    protected UUID convert(Sprache source) {
-        return UUID.fromString(source.getCodeSprache().toString());
-    }
-};
-Converter<Niveau, UUID> uuidConverterNiveau = new AbstractConverter<Niveau, UUID>() {
-    protected UUID convert(Niveau source) {
-        return UUID.fromString(source.getCodeNiveau().toString());
-    }
-};
-
-    private StudentDTO convertEntityToDto(Student student){
-    	modelMapper.addConverter(uuidConverterSprache);
-    	modelMapper.addConverter(uuidConverterNiveau);
-
-    	modelMapper.getConfiguration()
-    	.setMatchingStrategy(MatchingStrategies.LOOSE)
-    	  .setFieldMatchingEnabled(true);
-
-    	StudentDTO studentDTO=new StudentDTO();
-
-    	studentDTO=modelMapper.map(student, StudentDTO.class);
-    	System.out.print("isActivad dans studentDTO"+studentDTO.isAccountActivated());
-    	return studentDTO;
-    } 
-
-   
-   
-    
-    private Student convertDtoToEntity(StudentDTO studentDTO){
-    	//modelMapper.addConverter(convert(spracheDTO.getCodeSprache())  );
-
-        modelMapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.LOOSE);
-        Student student = new Student();
-        student = modelMapper.map(studentDTO, Student.class);
-        Set<Niveau> listeNiveau=niveauServices.getAllNiveauByUUID(studentDTO.getNiveau());
-        student.setNiveau(listeNiveau);    
-        Set<Sprache> sprache = spracheServices.getAllSprachenByCodeSprachen(studentDTO.getSprache());
-        student.setSprache(sprache);
-        Set<Roles> roles=rolesServices.getAllRolesByUUID(studentDTO.getRoles());
-        student.setRoles(roles);
-        return student;
-    }
-	
+	private StudentServices studentServices;
 	
 	
 	
     @Secured(value= {"ROLE_VERWALTER","ROLE_STUDENT","ROLE_LEHRER","ROLE_LEITER"})
 	@PostMapping(path = "/saveStudent")
-	public @ResponseBody Object saveStudent(@RequestBody @Valid StudentDTO studentDTO) {
+	public @ResponseBody ResponseEntity<?> saveStudent(@RequestBody @Valid StudentDTO studentDTO) {
 		System.out.println("Voici studentDTO"+studentDTO.getNumTelFinanceurCours());
 		
 
-	return lehrerServices.saveLehrer(convertDtoToEntity(studentDTO));
+	return new ResponseEntity<>(studentServices.saveStudent( this.studentServices.convertDtoToEntity(studentDTO)), HttpStatus.OK);
 	}
 	
 	
@@ -122,7 +63,7 @@ Converter<Niveau, UUID> uuidConverterNiveau = new AbstractConverter<Niveau, UUID
 	public ResponseEntity<List <StudentDTO>> listStudenten(){
 	
 		
-		List<StudentDTO> listeStudenten=lehrerServices.getListStudent().stream().map(this::convertEntityToDto).collect(Collectors.toList());;
+		List<StudentDTO> listeStudenten=studentServices.listStudenten().stream().map(studentDTO->this.studentServices. convertEntityToDto(studentDTO) ).collect(Collectors.toList());;
 		System.out.println("Das ist die Liste von Studenten"+listeStudenten);
 		listeStudenten.forEach(student -> {
 			System.out.print("voic la liste"+student.getNom());
@@ -135,13 +76,13 @@ Converter<Niveau, UUID> uuidConverterNiveau = new AbstractConverter<Niveau, UUID
 	@PatchMapping(path = "/updateStudent")
 	
 	public ResponseEntity<?> updateStudent ( @RequestBody StudentDTO studentDTO){
-		return new ResponseEntity<> (lehrerServices.updateLehrer(convertDtoToEntity(studentDTO)), HttpStatus.OK);
+		return new ResponseEntity<> (this.studentServices.updateStudent(this.studentServices.convertDtoToEntity(studentDTO)), HttpStatus.OK);
 	}
 	
 	@Secured(value= {"ROLE_VERWALTER","ROLE_STUDENT","ROLE_LEHRER","ROLE_LEITER"})
 	@DeleteMapping(path  = "/deleteStudent/{username}", produces = "text/plain")
 	public ResponseEntity<?> deleteStudent(@PathVariable("username") String username){
-		lehrerServices.deleteLehrer(username);
+		 this.studentServices.deletePersonne(username);
 		return new ResponseEntity<>( HttpStatus.OK);
 	}
 	

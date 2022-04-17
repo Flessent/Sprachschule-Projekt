@@ -2,9 +2,12 @@ C:\ProgsJava\DrE\src\main\java\dre\org\dao\StudentRepository.java
 C:\ProgsJava\DrE\src\main\java\dre\org\services\implementation\RaumServicesImplementation.java
 C:\ProgsJava\DrE\src\main\java\dre\org\dto\Niveau_ConverterUUID.java
 C:\ProgsJava\DrE\src\main\java\dre\org\dto\LehrerDTO.java
+C:\ProgsJava\DrE\src\main\java\dre\org\services\implementation\LeiterServicesImplementation.java
+C:\ProgsJava\DrE\src\main\java\dre\org\dao\LeiterRepository.java
 C:\ProgsJava\DrE\src\main\java\dre\org\entities\Lehrer.java
 C:\ProgsJava\DrE\src\main\java\dre\org\controller\BetreuerRestService.java
 C:\ProgsJava\DrE\src\main\java\dre\org\dao\SekretaerRepository.java
+C:\ProgsJava\DrE\src\main\java\dre\org\controller\LeiterRestService.java
 C:\ProgsJava\DrE\src\main\java\dre\org\dto\RolesDTO.java
 C:\ProgsJava\DrE\src\main\java\dre\org\dao\RolesRepository.java
 C:\ProgsJava\DrE\src\main\java\dre\org\controller\SpracheRestService.java
@@ -36,6 +39,7 @@ C:\ProgsJava\DrE\src\main\java\dre\org\entities\Raum.java
 C:\ProgsJava\DrE\src\main\java\dre\org\services\implementation\StudentServicesImplementation.java
 C:\ProgsJava\DrE\src\main\java\dre\org\entities\Personne.java
 C:\ProgsJava\DrE\src\main\java\dre\org\services\StudentServices.java
+C:\ProgsJava\DrE\src\main\java\dre\org\dto\LeiterDTO.java
 C:\ProgsJava\DrE\src\main\java\dre\org\entities\User.java
 C:\ProgsJava\DrE\src\main\java\dre\org\AuthenticationBean.java
 C:\ProgsJava\DrE\src\main\java\dre\org\services\implementation\NiveauServicesImplementation.java
@@ -67,6 +71,7 @@ C:\ProgsJava\DrE\src\main\java\dre\org\controller\LehrerRestService.java
 C:\ProgsJava\DrE\src\main\java\dre\org\dto\Sprache_ConverterUUID.java
 C:\ProgsJava\DrE\src\main\java\dre\org\entities\Student.java
 C:\ProgsJava\DrE\src\main\java\dre\org\dto\BetreuerDTO.java
+C:\ProgsJava\DrE\src\main\java\dre\org\services\LeiterServices.java
 C:\ProgsJava\DrE\src\main\java\dre\org\services\KursServices.java
 C:\ProgsJava\DrE\src\main\java\dre\org\controller\RaumRestService.java
 C:\ProgsJava\DrE\src\main\java\dre\org\controller\NiveauRestService.java

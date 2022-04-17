@@ -6,7 +6,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -18,11 +17,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.validation.constraints.Null;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @DiscriminatorValue(value = "LEHRER")
 @Entity(name = "lehrer")
 @JsonTypeName("lehrer")
@@ -65,7 +61,12 @@ public class Lehrer extends Personne implements Serializable{
 				this.salaire = salaire;
 			
 			}
-		
+			public Lehrer( java.util.Date heute2, String activiteEnParalelle, boolean isActived,
+					HashSet<Sprache> sprache2, HashSet<Niveau> niveau2, int nbreMoisExperiences2, BigDecimal salaire2,
+					HashSet<Roles> roles) {
+				// TODO Auto-generated constructor stub
+			}
+
 			
 	
 			
@@ -93,6 +94,17 @@ public class Lehrer extends Personne implements Serializable{
 
 
 		
+
+
+
+
+
+
+
+		
+
+
+
 
 
 			public Integer getNbreMoisExperiences() {
